@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PetShop.Models.ProductCategory>
+<!--Index của Product trong Admin/View-->
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-6">
+                <strong class="text-uppercase text-danger">Danh sách sản phẩm</strong>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="@Url.Action("Create","Product")" class="btn btn-sm btn-success">
+                    <i class="fa-solid fa-plus"></i>Thêm
+                </a>
+                <a href="@Url.Action("Trash","Product")" class="btn btn-sm btn-danger">
+                    <i class="fa-solid fa-trash-alt"></i>Thùng rác
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-3">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th style="width:20px" ; class="text-center">#</th>
+                    <th style="width:100px" ; class="text-center">Hình ảnh</th>
+                    <th>Tên loại sản phẩm</th>
+                    <th>Loại sản phẩm</th>
+                    <th style="width:180px" ; class="text-center">Chức năng</th>
+                    <th style="width:20px" ; class="text-center">ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td class="text-center">
+                        <input name="checkId" type="checkbox" />
+                    </td>
+                    <td>
+                        <img style="width:100px" src="~/Public/images/Product/@item.Img" class="img-fluid" />
+                    </td>
+                    <td>@item.Name</td>
+                    <!--Vẫn chạy được nhưng hiển thị là lỗi-->
+                    <td>@item.CatName</td>
+                    <td class="text-center">
+                        @if (item.Status == 1)
+                        {
+                            <a href="@Url.Action("Status","Product",new {@id = item.Id})" class="btn btn-sm btn-success">
+                                <i class="fa-solid fa-toggle-on"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Status","Product",new {@id = item.Id})" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-toggle-off"></i>
+                            </a>
+                        }
+                        <!--Tạo button cập nhập-->
+                        <a href="@Url.Action("Edit","Product",new {@id = item.Id})" class="btn btn-sm btn-info">
+                            <i class="fa-solid fa-edit"></i>
+                        </a>
+                        <!--Tạo button view-->
+                        <a href="@Url.Action("Details","Product",new {@id = item.Id})" class="btn btn-sm btn-warning">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a href="@Url.Action("DelTrash","Product",new {@id = item.Id})" class="btn btn-sm btn-outline-danger">
+                            <i class="fa-solid fa-trash-alt"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">@item.Id</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

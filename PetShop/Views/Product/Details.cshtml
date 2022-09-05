@@ -1,0 +1,308 @@
+﻿@model PetShop.Models.Product
+@{
+    ViewBag.Title = Model.Category.Name + " | " + Model.Name;
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<style>
+    #box-nav {
+        display: flex;
+        margin: 0 auto;
+        width: 1000px;
+        padding: 40px 0;
+    }
+    img {
+        max-width: 100%;
+    }
+    #box-content-right {
+        text-align: center; 
+        padding: 60px ;
+        width: 50%;
+    }
+    #box-content-right h2 {
+        display: inline-block;
+        margin: 0 auto;
+       /* font-size: 20px;*/
+    }
+    #box-content-right #box-qty-price {
+        display:flex;
+    }
+    #qty {
+        /*margin: 0 auto;*/
+        /*text-align:center;*/
+        display:flex;
+        width: 100%;
+    }
+    #qty label {
+        padding: 10px 0 10px 40px;
+        margin: 0 10px;
+    }
+    #qty input {
+        width: 200px;
+        margin: 10px 0 10px 20px;
+        border-style: none;
+        background-color: #f6f6f6;
+    }
+    button {
+        width: 100%;
+        height: 50px;
+        margin: 10px 0;
+        border: 1px solid black;
+    }
+    #add {
+        border: 1px solid black;
+        background-color:white;
+    }
+    #add:hover {
+        border: 1px solid black;
+        background-color: black;
+        color: white;
+    }
+    #buy {
+        border: 1px solid black;
+        background-color: black;
+        color: white;
+    }
+    #buy:hover {
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+    }
+    h2 {
+        margin: 20px 0;
+    }
+    h4 {
+        margin: 20px 0;
+    }
+    #box-img-left:hover img {
+        transform: scale(1.2, 1.2);
+        z-index: 9;
+    }
+    #box-img-left img {
+        width: 100%;
+        height: 100%;
+        margin-bottom: -5px;
+        transition: all 0.3s ease-out;
+        position: relative;
+        z-index: 2;
+    }
+    #box-img-left {
+        width: 50%;
+        width: auto;
+        max-width: 500px;
+        height: auto;
+        overflow: hidden;
+        position: relative;
+    }
+</style>
+<div >
+    <div >
+        <div>
+            <div id="box-nav">
+                
+                <div id="box-img-left">
+                    <img class="img-responsive" src="~/Public/images/Product/@Model.Img" />
+                </div>
+                
+                <div id="box-content-right">
+                    <div>
+                        <h2>@Model.Name</h2>
+                    </div> 
+                    <h4>@Model.Price</h4>
+                        @*<span>
+            <span class="item-title">Product Code:</span>
+            <span>
+                <strong>
+                    @Model.Name - @Model.Id
+                </strong>
+            </span>
+        </span>*@
+                    @*<span><br /></span>
+                    <span>
+                        <span class="item-title">Category: </span>
+                        <a href="/Product/Category/CategoryID=@Model.CategoryID">@Model.Category.Name </a>
+                    </span>*@
+                    @*<p>
+                        <span>
+                            <i>Availability: </i>
+                        </span>
+                        <span>
+                            <strong>
+                                @Model.Number
+                            </strong>
+                        </span>
+                        In stock
+                    </p>*@
+         
+                   
+                        
+                  
+                    <div id="qty"  >
+                        <label>Qty:</label>
+                        <input type="text"  class="form-control" name="qty" id="qty" maxlength="12" value="1" title="Qty">
+
+                    </div>
+                    <div>
+                        <button id="add" type="button" title="Add to Cart" data-id="@Model.Id">
+                            <span>Add to Cart</span>
+                        </button>
+                        <button id="buy" type="button" title="Buy to it">
+                            <span>Buy it now</span>
+                        </button>
+                    </div>
+                    
+                            
+
+                            
+
+
+                        
+
+
+                    </div>
+            </div>
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active">
+                        <a href="#descriptions" role="tab" data-toggle="tab">
+                            Descriptions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#specifications" role="tab" data-toggle="tab">
+                            Specifications
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#comments" role="tab" data-toggle="tab">
+                            <i class="fa fa-envelope"></i> Comments
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade active in" id="descriptions">
+                        <h2>Descriptions</h2>
+                        <div>
+                            @Model.Detail
+                        </div>
+                    </div>
+                    <div class="tab-pane fade row" id="specifications">
+
+
+                        <h2>Chi tiết sản phẩm</h2>
+
+
+                        <div class="col-md-6">
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <td>
+                                        ProductCode:
+                                    </td>
+                                    <td>
+                                        @Model.Name - @Model.Id
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Name
+                                    </td>
+                                    <td>
+                                        @Model.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Available
+                                    </td>
+                                    <td>
+                                        @Model.Status
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Category
+                                    </td>
+                                    <td>
+                                        @Model.Category.Name
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Discount
+                                    </td>
+                                    <td>
+                                        @Model.Pricesale
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6"></div>
+
+
+                    </div>
+                    <div class="tab-pane fade" id="comments">
+                        <h2>Your comments, Our treasure</h2>
+                        <div class="fb-comments" data-href="/chi-tiet/@Model.Slug/@Model.Id" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    /* Tab Navigation */
+    .nav-tabs {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+        .nav-tabs > li > a {
+            background: #DADADA;
+            border-radius: 0;
+            box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4);
+        }
+
+        .nav-tabs > li.active > a,
+        .nav-tabs > li.active > a:hover {
+            background: #fff;
+            box-shadow: inset 0 0 0 0 rgba(0,0,0,.4),-2px -3px 5px -2px rgba(0,0,0,.4);
+        }
+
+    /* Tab Content */
+    .tab-pane {
+        background: #fff;
+        box-shadow: 0 0 4px rgba(0,0,0,.4);
+        border-radius: 0;
+        padding: 10px;
+    }
+
+    /*  responsive facebook comment box*/
+    .fb_iframe_widget,
+    .fb_iframe_widget span,
+    .fb_iframe_widget span iframe[style] {
+        min-width: 100% !important;
+        width: 100% !important;
+    }
+
+
+    .scroll-img {
+        border-left: 1px solid #DADADA;
+        overflow: hidden;
+    }
+
+        .scroll-img ul {
+            height: 800px;
+            margin: 0;
+        }
+
+            .scroll-img ul li {
+                display: block;
+            }
+</style>
